@@ -49,7 +49,7 @@ public Optional <User> getUserById(@PathVariable int id) {
 	}
 	
 	@DeleteMapping("/{id}")
-	public User deleteUser(@PathVariable int id) {
+	public User deleteUser(@PathVariable int id,  User m) {
 		Optional<User> u = userRepo.findById(id);
 		if(u.isPresent()) {
 			userRepo.deleteById(id);
