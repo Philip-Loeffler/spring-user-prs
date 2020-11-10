@@ -14,48 +14,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prs.business.Product;
 import com.prs.business.User;
-import com.prs.db.UserRepo;
+import com.prs.db.ProductRepo;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/products")
+public class ProductController {
 
-	
 	@Autowired
-	private UserRepo userRepo;
-		
+	private ProductRepo productRepo;
+	
 	@GetMapping("/")
-	public List<User> getAll() {
-		//find all is doing a select all query, and literally doing everything for you. like opening connection ectect
-		return userRepo.findAll();
-}
-	@GetMapping("/{id}")
-public Optional <User> getUserById(@PathVariable int id) {
-		return userRepo.findById(id);
+	private List <Product> getAllProducts() {
+		return productRepo.findAll();
+	}
+	
+	@GetMapping("{/id}")
+	private Optional <Product> getProductById(@PathVariable int id) {
+		return productRepo.findById(id);
 	}
 	
 	@PostMapping("/")
-	public User addUser(@RequestBody User u) {
-		u = userRepo.save(u);
-		return u;
+	private Product postProduct(@RequestBody Product p) {
+		p = productRepo.save(p);
+		return p;
 	}
 	
 	@PutMapping("/")
-	public User updateUser(@RequestBody User u) {
-		u = userRepo.save(u);
-		return u;
+	private Product putProduct(@RequestBody Product p) {
+		p = productRepo.save(p);
+		return p;
 	}
 	
-	@DeleteMapping("/{id}")
-	public User deleteUser(@PathVariable int id) {
-		Optional<User> u = userRepo.findById(id);
-		if(u.isPresent()) {
-			userRepo.deleteById(id);
+	@DeleteMapping("{/id}")
+	private Product deleteProduct(@PathVariable int id) {
+		Optional<Product> p = productRepo.findById(id);
+		if(p.isPresent()) {
+		productRepo.deleteById(id);
 		} else {
-			System.out.println("error trying to delte id" + id);
+			System.out.println("there is no" + id + "to delete");
 		}
-		return u.get();
-}
+		return p.get();
+	}
 }
