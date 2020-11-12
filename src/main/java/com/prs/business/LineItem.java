@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
 @Entity
 public class LineItem {
@@ -15,10 +14,10 @@ public class LineItem {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="RequestId")
 	private Request request;
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="ProductId")
 	private Product product;
 	private int quantity;
 	
