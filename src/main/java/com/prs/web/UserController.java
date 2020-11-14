@@ -36,7 +36,7 @@ public class UserController {
 }
 	@GetMapping("/{id}")
 public Optional <User> getUserById(@PathVariable int id) {
-		return userRepo.findById(id);
+		return userRepo.findById(id); 
 	}
 	
 	@PostMapping("/")

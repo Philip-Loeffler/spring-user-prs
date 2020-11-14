@@ -16,7 +16,7 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name="vendorId")
 	private Vendor vendor;
 	private String partNumber;
 	private String name;

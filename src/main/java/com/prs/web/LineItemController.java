@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prs.business.LineItem;
+import com.prs.business.Request;
 import com.prs.db.LineItemRepo;
 
 @CrossOrigin
@@ -26,12 +28,13 @@ public class LineItemController {
 @Autowired
 private LineItemRepo lineItemRepo;
 
+
 @GetMapping("/")
 private List <LineItem> getAllLineItems() {
 	return lineItemRepo.findAll();
 }
 
-@GetMapping("{/id}")
+@GetMapping("/{id}")
 private Optional <LineItem> getLineItemById(@PathVariable int id) {
 	return lineItemRepo.findById(id);
 }
@@ -57,5 +60,11 @@ private LineItem deleteLineItem(@PathVariable int id) {
 return l.get();
 }
 
+@GetMapping("lines-items-for-pr/{id}")
+private Optional<LineItem> linesItemsForRequest(@PathVariable int id) {
+	return lineItemRepo.findById(id);
+	
+	
+}
 
 }
