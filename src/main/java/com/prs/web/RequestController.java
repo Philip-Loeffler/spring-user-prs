@@ -69,6 +69,8 @@ private Request approveRequest(@RequestBody Request r) {
 	r.setStatus("Approved");
 	return requestRepo.save(r);
 }
+
+
 @PutMapping("/submit-review")
 private Request requestStatus(@RequestBody Request r) {
 	double total = r.getTotal();
@@ -79,5 +81,12 @@ private Request requestStatus(@RequestBody Request r) {
 	}
 	r.setSubmittedDate(LocalDate.now());
 	return requestRepo.save(r);
+}
+
+
+private double findByTotal() {
+	Request total = new Request();
+	return total.getTotal();
+	
 }
 }
