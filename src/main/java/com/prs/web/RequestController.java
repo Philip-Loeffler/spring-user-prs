@@ -83,10 +83,4 @@ private Request requestStatus(@RequestBody Request r) {
 	return requestRepo.save(r);
 }
 
-
-private double findByTotal() {
-	Request total = new Request();
-	return total.getTotal();
-	
-}
 }
