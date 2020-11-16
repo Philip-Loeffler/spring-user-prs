@@ -61,8 +61,8 @@ return l.get();
 }
 
 @GetMapping("lines-items-for-pr/{id}")
-private Optional<LineItem> linesItemsForRequest(@PathVariable int id) {
-	return lineItemRepo.findById(id);
+private List<LineItem> linesItemsForRequest(@PathVariable int id) {
+	return lineItemRepo.findAllByRequestId(id);
 	
 	
 }

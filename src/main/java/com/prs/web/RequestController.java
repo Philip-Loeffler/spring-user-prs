@@ -58,4 +58,14 @@ private Request deleteLineItem(@PathVariable int id) {
 	}
 return l.get();
 }
+@PutMapping("/rejected")
+private Request rejectRequest(@RequestBody Request r) {
+	r.setStatus("Rejected");
+	return requestRepo.save(r);
+}
+@PutMapping("/approved")
+private Request approveRequest(@RequestBody Request r) {
+	r.setStatus("Approved");
+	return requestRepo.save(r);
+}
 }
