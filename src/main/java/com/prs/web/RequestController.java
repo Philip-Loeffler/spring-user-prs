@@ -1,4 +1,5 @@
 package com.prs.web;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,17 @@ private Request rejectRequest(@RequestBody Request r) {
 @PutMapping("/approved")
 private Request approveRequest(@RequestBody Request r) {
 	r.setStatus("Approved");
+	return requestRepo.save(r);
+}
+@PutMapping("/submit-review")
+private Request requestStatus(@RequestBody Request r) {
+	double total = r.getTotal();
+	if(total <= 50.00) {
+		r.setStatus("approved");
+	} else {
+		r.setStatus("review");
+	}
+	r.setSubmittedDate(LocalDate.now());
 	return requestRepo.save(r);
 }
 }
