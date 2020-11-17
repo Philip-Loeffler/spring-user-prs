@@ -59,11 +59,13 @@ private Request deleteLineItem(@PathVariable int id) {
 	}
 return l.get();
 }
+
 @PutMapping("/rejected")
 private Request rejectRequest(@RequestBody Request r) {
 	r.setStatus("Rejected");
 	return requestRepo.save(r);
 }
+
 @PutMapping("/approved")
 private Request approveRequest(@RequestBody Request r) {
 	r.setStatus("Approved");
@@ -82,5 +84,11 @@ private Request requestStatus(@RequestBody Request r) {
 	r.setSubmittedDate(LocalDate.now());
 	return requestRepo.save(r);
 }
+
+@GetMapping("/list-review/{id}")
+private List<Request> listItemsInReview(@PathVariable int id) {
+	return requestRepo.findByUserIdNotAndStatus(id, "review");
+}
+
 
 }
