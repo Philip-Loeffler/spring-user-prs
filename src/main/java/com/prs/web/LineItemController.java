@@ -28,6 +28,8 @@ public class LineItemController {
 	
 @Autowired
 private LineItemRepo lineItemRepo;
+
+@Autowired
 private RequestRepo requestRepo;
 
 @GetMapping("/")
@@ -43,46 +45,70 @@ private Optional <LineItem> getLineItemById(@PathVariable int id) {
 
 @PostMapping("/")
 private LineItem postLineItem(@RequestBody LineItem l) {
-	recalculateTotal(l.getRequest().getId());
-	return lineItemRepo.save(l);
+//	recalculateTotal(l.getRequest().getId());
+	l = lineItemRepo.save(l);
+	recalculateTotal(l);
+	return l;
+	
 }
 
 @PutMapping("/")
 private LineItem putLineItem(@RequestBody LineItem l) {
-	recalculateTotal(l.getRequest().getId());
-	return lineItemRepo.save(l);
+	l = lineItemRepo.save(l);
+	recalculateTotal(l);
+	return l;
+	
 }
 
-@DeleteMapping("{/id}")
-private LineItem deleteLineItem(@PathVariable int id) {
-	Optional <LineItem> l = lineItemRepo.findById(id);
-	LineItem line = new LineItem();
-	if(l.isPresent()) {
-		lineItemRepo.deleteById(id);
-	} else {
-	System.out.println("cannot find" + id + "to delete");
-	}
-	recalculateTotal(line.getRequest().getId());
-return l.get();
-}
+//@DeleteMapping("{/id}")
+//private LineItem deleteLineItem(@PathVariable int id) {
+//	Optional <LineItem> l = lineItemRepo.findById(id);
+//	LineItem line = new LineItem();
+//	if(l.isPresent()) {
+//		lineItemRepo.deleteById(id);
+//		recalculateTotal(line.getRequest().getId());
+//	} else {
+//	System.out.println("cannot find" + id + "to delete");
+//	}
+//return l.get();
+//}
 
 @GetMapping("lines-items-for-pr/{id}")
 private List<LineItem> linesItemsForRequest(@PathVariable int id) {
 	return lineItemRepo.findAllByRequestId(id);
 	}
 
-
-//refactor
-public void recalculateTotal(int requestId) {
-	List<LineItem> line = lineItemRepo.findByRequestId(requestId);	
+public void recalculateTotal(LineItem li) {	
+	List<LineItem> lineItems = lineItemRepo.findByRequestId(li.getRequest().getId());
+	
 	double total = 0.0;
-	for (LineItem lineItems : line) {
-		Product p = lineItems.getProduct();
-		total += p.getPrice()*lineItems.getQuantity();
+	for(LineItem lineItem : lineItems) {
+		Product p = lineItem.getProduct();
+		total += (p.getPrice() * lineItem.getQuantity());
 	}
-	Request r = requestRepo.findById(requestId).get();
-	r.setTotal(total);
-	requestRepo.save(r);
-	}
+	
+	Request request = li.getRequest();
+	request.setTotal(total);
+	requestRepo.save(request);
 }
+
+
+
+//working, refactor one more time 
+public void recalculateLineItemTotal(LineItem li) {
+	List <LineItem> l = lineItemRepo.findByRequestId(li.getRequest().getId());
+	double total = 0.0;
+	for (LineItem lineItem : l) {
+		Product p = lineItem.getProduct();
+		total += (p.getPrice() * lineItem.getQuantity());
+	}
+	Request request = li.getRequest();
+	request.setTotal(total);
+	requestRepo.save(request);
+	
+}
+}
+
+
+
 
