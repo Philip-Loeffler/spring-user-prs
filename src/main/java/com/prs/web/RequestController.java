@@ -49,7 +49,7 @@ private Request putRequest(@RequestBody Request r) {
 	return requestRepo.save(r);
 }
 
-@DeleteMapping("{/id}")
+@DeleteMapping("/{id}")
 private Request deleteLineItem(@PathVariable int id) {
 	Optional <Request> l = requestRepo.findById(id);
 	if(l.isPresent()) {

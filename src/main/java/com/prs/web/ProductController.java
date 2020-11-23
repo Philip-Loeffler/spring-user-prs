@@ -48,7 +48,7 @@ public class ProductController {
 		return p;
 	}
 	
-	@DeleteMapping("{/id}")
+	@DeleteMapping("/{id}")
 	private Product deleteProduct(@PathVariable int id) {
 		Optional<Product> p = productRepo.findById(id);
 		if(p.isPresent()) {

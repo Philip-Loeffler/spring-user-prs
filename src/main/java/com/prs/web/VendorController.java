@@ -47,7 +47,7 @@ public class VendorController {
 		return vendorRepo.save(v);
 	}
 	
-	@DeleteMapping("{/id}")
+	@DeleteMapping("/{id}")
 	private Vendor deleteVendor(@PathVariable int id) {
 		Optional<Vendor> v = vendorRepo.findById(id);
 if(v.isPresent() ) {
