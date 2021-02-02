@@ -113,7 +113,7 @@ public LocalDateTime getSubmittedDate() {
 }
 
 public void setSubmittedDate(LocalDateTime submittedDate) {
-	submittedDate = submittedDate;
+	this.submittedDate = submittedDate;
 }
 
 public String getReasonForRejection() {
