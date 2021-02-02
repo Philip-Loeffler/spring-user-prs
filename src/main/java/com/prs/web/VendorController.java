@@ -20,7 +20,7 @@ import com.prs.db.VendorRepo;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/vendors")
+@RequestMapping("/vendor")
 public class VendorController {
 
 	
@@ -32,7 +32,7 @@ public class VendorController {
 		return vendorRepo.findAll();
 	}
 	
-	@GetMapping("{/id}")
+	@GetMapping("/{id}")
 	private  Optional <Vendor> getVendorById(@PathVariable int id) {
 		return vendorRepo.findById(id);
 	}

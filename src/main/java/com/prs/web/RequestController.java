@@ -1,5 +1,6 @@
 package com.prs.web;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ import com.prs.db.RequestRepo;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/requests")
+@RequestMapping("/request")
 public class RequestController {
 
 	
@@ -33,7 +34,7 @@ private List <Request> getAllRequests() {
 }
 
 
-@GetMapping("{/id}")
+@GetMapping("/{id}")
 private Optional <Request> getRequestId(@PathVariable int id) {
 	return requestRepo.findById(id);
 }
@@ -81,7 +82,7 @@ private Request requestStatus(@RequestBody Request r) {
 	} else {
 		r.setStatus("review");
 	}
-	r.setSubmittedDate(LocalDate.now());
+	r.setSubmittedDate(LocalDateTime.now());
 	return requestRepo.save(r);
 }
 

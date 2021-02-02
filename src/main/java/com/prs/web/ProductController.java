@@ -20,7 +20,7 @@ import com.prs.db.ProductRepo;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/product")
 public class ProductController {
 
 	@Autowired

@@ -22,7 +22,7 @@ import com.prs.db.RequestRepo;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/lineItems")
+@RequestMapping("/lineItem")
 public class LineItemController {
 
 	
@@ -72,7 +72,7 @@ private LineItem deleteLineItem(@PathVariable int id) {
 return l.get();
 }
 
-@GetMapping("lines-items-for-pr/{id}")
+@GetMapping("line-item-for-pr/{id}")
 private List<LineItem> linesItemsForRequest(@PathVariable int id) {
 	return lineItemRepo.findAllByRequestId(id);
 	}

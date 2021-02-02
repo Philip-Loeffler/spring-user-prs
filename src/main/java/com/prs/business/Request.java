@@ -1,6 +1,7 @@
 package com.prs.business;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
@@ -20,7 +21,7 @@ private LocalDate dateNeeded;
 private String deliveryMode;
 private String status;
 private double total;
-private LocalDate SubmittedDate;
+private LocalDateTime submittedDate;
 private String reasonForRejection;
 
 public Request() {
@@ -29,7 +30,7 @@ public Request() {
 }
 
 public Request(int id, User user, String description, String justification, LocalDate dateNeeded, String deliveryMode,
-		String status, double total, LocalDate submittedDate, String reasonForRejection) {
+		String status, double total, LocalDateTime submittedDate, String reasonForRejection) {
 	super();
 	this.id = id;
 	this.user = user;
@@ -39,7 +40,7 @@ public Request(int id, User user, String description, String justification, Loca
 	this.deliveryMode = deliveryMode;
 	this.status = status;
 	this.total = total;
-	SubmittedDate = submittedDate;
+	this.submittedDate = submittedDate;
 	this.reasonForRejection = reasonForRejection;
 }
 
@@ -107,12 +108,12 @@ public void setTotal(double total) {
 	this.total = total;
 }
 
-public LocalDate getSubmittedDate() {
-	return SubmittedDate;
+public LocalDateTime getSubmittedDate() {
+	return submittedDate;
 }
 
-public void setSubmittedDate(LocalDate submittedDate) {
-	SubmittedDate = submittedDate;
+public void setSubmittedDate(LocalDateTime submittedDate) {
+	submittedDate = submittedDate;
 }
 
 public String getReasonForRejection() {
